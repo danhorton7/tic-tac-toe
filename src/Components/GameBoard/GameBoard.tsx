@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { GameBoardType } from './GameBoard.types'
+import { GameBoardProps, GameBoardType } from './GameBoard.types'
 
 const initialBoard: GameBoardType = [
   [null, null, null],
@@ -7,20 +6,16 @@ const initialBoard: GameBoardType = [
   [null, null, null],
 ]
 
-const GameBoard = () => {
-  const [gameBoard, setGameBoard] = useState<GameBoardType>(initialBoard)
+const GameBoard = ({ onSelectSquare, turns }: GameBoardProps) => {
+  let gameBoard: GameBoardType = initialBoard
 
-  const handleSelectSquare = (rowIdx: number, colIdx: number) => {
-    setGameBoard((prevGameBoard) => {
-      const newBoardState: GameBoardType = [
-        [...prevGameBoard[0]],
-        [...prevGameBoard[1]],
-        [...prevGameBoard[2]],
-      ]
-      newBoardState[rowIdx][colIdx] = 'X'
-      return newBoardState
-    })
+  for (const turn of turns) {
+    const { square, player } = turn
+    const { row, col } = square
+
+    gameBoard[row][col] = player
   }
+
   return (
     <ol id="game-board">
       {gameBoard.map((row, rowIdx) => (
@@ -28,7 +23,10 @@ const GameBoard = () => {
           <ol>
             {row.map((cellValue, colIdx) => (
               <li key={colIdx}>
-                <button onClick={() => handleSelectSquare(rowIdx, colIdx)}>
+                <button
+                  disabled={cellValue !== null}
+                  onClick={() => onSelectSquare(rowIdx, colIdx)}
+                >
                   {cellValue}
                 </button>
               </li>

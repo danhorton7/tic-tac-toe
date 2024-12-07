@@ -1,13 +1,13 @@
 import { useState } from 'react'
 import { PlayerProps } from './Player.types'
 
-const Player = ({ playerName, symbol }: PlayerProps) => {
+const Player = ({ playerName, symbol, isActive }: PlayerProps) => {
   const [isEditing, setIsEditing] = useState(false)
 
   const [name, setName] = useState(playerName || 'Player')
 
   return (
-    <li>
+    <li className={isActive ? 'active' : undefined}>
       <span className="player">
         {isEditing ? (
           <input

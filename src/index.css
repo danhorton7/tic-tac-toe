@@ -1,4 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Roboto+Slab:wght@400;700&display=swap');
+/* Option 2: More comprehensive approach */
+button:disabled {
+  cursor: not-allowed !important;
+  pointer-events: all !important;
+  opacity: 0.7;
+  background-color: #ccc;
+}
+
+/* If you want to style the hover state of disabled buttons */
+button:disabled:hover {
+  background-color: #ef0e0e!important;
+  /* Keeps the same color to show it's unclickable */
+}
 
 * {
   box-sizing: border-box;
