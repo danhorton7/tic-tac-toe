@@ -1,12 +1,50 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <link rel="preload" href="bg-pattern-dark.png" as="image" />
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Vite + React + TS</title>
+    <style>
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+
+      header img {
+        width: 8rem;
+        object-fit: contain;
+        margin: 3rem auto 1rem auto;
+        filter: drop-shadow(0 0 8px rgba(0, 0, 0, 0.4));
+      }
+
+      body {
+        background: #f1d246;
+        /* Fallback colour */
+        background: radial-gradient(circle at top,
+            rgba(241, 210, 70, 0.98),
+            rgba(250, 176, 103, 0.87)),
+          url('bg-pattern-dark.png');
+        background-repeat: repeat;
+        background-size: 100% 100%, 30% 30%, 100% 100%;
+        min-height: 100vh;
+      }
+    </style>
   </head>
   <body>
+    <header>
+      <img
+  src="game-logo.png"
+  alt="Tic Tac Toe Game logo"
+  width="128"
+  height="128"
+  loading="eager"
+/>
+
+      <h1>TicTacToe</h1>
+    </header>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
