@@ -1,5 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Caprasimo&family=Roboto+Slab:wght@400;700&display=swap');
-/* Option 2: More comprehensive approach */
+
+.confetti-container {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.confetti-piece {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  bottom: 0;
+  left: 50%;
+
+  animation: confetti-shoot 3s ease-out forwards;
+}
+
+@keyframes confetti-shoot {
+  0% {
+    transform: translate(-50%, 0) rotate(0deg);
+
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(
+        calc(-50% + var(--spread-x)),
+        calc(-100vh + var(--spread-y))
+      )
+      rotate(var(--rotation));
+    opacity: 0;
+  }
+}
+
 button:disabled {
   cursor: not-allowed !important;
   pointer-events: all !important;
@@ -7,10 +45,22 @@ button:disabled {
   background-color: #ccc;
 }
 
-/* If you want to style the hover state of disabled buttons */
-button:disabled:hover {
-  background-color: #ef0e0e!important;
-  /* Keeps the same color to show it's unclickable */
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+}
+
+/* Only apply hover effect after a real mouse movement */
+button:disabled:hover:active {
+  background-color: #ef0e0e !important;
+}
+
+/* Or better, use a transition delay */
+button:disabled {
+  cursor: not-allowed;
+  pointer-events: all !important;
+  transition: background-color 0s;
+  /* Reset any existing transitions */
 }
 
 * {
@@ -31,12 +81,17 @@ html {
 }
 
 body {
-  background: radial-gradient(circle at top,
+  background: radial-gradient(
+      circle at top,
       rgba(241, 210, 70, 0.98),
-      rgba(250, 176, 103, 0.87)),
+      rgba(250, 176, 103, 0.87)
+    ),
     url('bg-pattern-dark.png');
   background-repeat: repeat;
-  background-size: 100% 100%, 30% 30%, 100% 100%;
+  background-size:
+    100% 100%,
+    30% 30%,
+    100% 100%;
   min-height: 110rem;
 }
 
@@ -213,6 +268,8 @@ ol {
   align-items: center;
   background-color: rgba(40, 38, 23, 0.95);
   animation: pop-in 0.5s cubic-bezier(0.68, -0.55, 0.65, 0.52) forwards;
+  z-index: 10;
+  /* Increased z-index */
 }
 
 #game-over h2 {
@@ -239,7 +296,9 @@ ol {
   padding: 0.5rem 1rem;
   border-radius: 4px;
   cursor: pointer;
-  transition: all 0.2s, color 0.2s;
+  transition:
+    all 0.2s,
+    color 0.2s;
   box-shadow: 0 0 8px rgba(255, 187, 0, 0.4);
 }
 

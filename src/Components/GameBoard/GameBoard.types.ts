@@ -3,7 +3,11 @@ export type Player = GameSymbol
 export type CellValue = GameSymbol
 
 export type BoardRow = [CellValue, CellValue, CellValue]
-export type GameBoardType = [BoardRow, BoardRow, BoardRow]
+export type GameBoardType = [
+  [GameSymbol, GameSymbol, GameSymbol],
+  [GameSymbol, GameSymbol, GameSymbol],
+  [GameSymbol, GameSymbol, GameSymbol],
+]
 
 export const initialGameBoard: GameBoardType = [
   [null, null, null],
@@ -24,3 +28,8 @@ export interface Turn {
   square: Square
   player: Player
 }
+
+export type WinningCombination = {
+  row: number
+  col: number
+}[]

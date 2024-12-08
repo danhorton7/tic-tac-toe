@@ -1,13 +1,8 @@
 import { GameBoardProps, GameBoardType } from './GameBoard.types'
-
-const initialBoard: GameBoardType = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-]
+import { INITIAL_BOARD } from '../../constants/board.constants'
 
 const GameBoard = ({ onSelectSquare, turns }: GameBoardProps) => {
-  let gameBoard: GameBoardType = initialBoard
+  let gameBoard: GameBoardType = structuredClone(INITIAL_BOARD)
 
   for (const turn of turns) {
     const { square, player } = turn
